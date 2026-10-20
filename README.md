@@ -129,6 +129,7 @@ controller logs, tripinfo, route hashes, checkpoint hashes, a combined
 `summary.json`, recorded frames, and a portable `results.html` with replay.
 Keep the terminal open while using the live page; Ctrl+C stops its local server.
 The saved HTML replay works independently afterwards.
+Replay defaults to 20x, with 5x and 60x also available for presentations.
 
 ## Reproducibility
 

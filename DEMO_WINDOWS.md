@@ -51,6 +51,8 @@ and checks that SUMO is using the external `online` signal program.
 Output: `demo_runs/<timestamp>_paired_<id>/results.html`.
 The page shows two intersection replays, key metrics, percentage changes,
 and two queue traces. Use Replay and the timeline slider after completion.
+Replay supports 5x, 20x and 60x speed; the default 20x shows a 30-minute
+recording in approximately 90 seconds. Playback speed does not change metrics.
 A collapsed section retains the historical 60-run benchmark. It is separate
 from the current live comparison.
 

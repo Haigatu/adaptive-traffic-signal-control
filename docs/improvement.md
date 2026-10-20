@@ -67,6 +67,14 @@ The demo now observes 1,800 seconds to show longer queue dynamics, and keeps
 `--duration 300` available. Changing duration changes the generated demand
 profile; the old and new horizons must not be treated as a matched comparison.
 
+The completed default 1,800-second demo (seed 1000, load 0.70, full warm-up)
+measured **194.99 -> 105.75 s delay (-45.8%)**, **177.70 -> 84.70 average
+queued vehicles (-52.3%)**, and **1,733 -> 1,941 arrivals (+12.0%)**.
+This is a separate demonstration example, not the held-out benchmark.
+Its sanitized paired summary is saved as `demo_1800_summary.json`.
+Both runs produced 1,800 synchronized frames and verified external `online`
+signal control throughout. Original artifact hashes remained unchanged.
+
 Original checkpoints and research outputs remain unchanged. The experiment
 is stored separately under `artifacts/improvement/`: protocol, validation
 results, selection, trained checkpoints, individual tests and summaries.

@@ -9,6 +9,7 @@
 <div class="meta" id="meta"></div>
 <style>
 [hidden]{display:none!important}
+.playback input{min-width:0}
 #newBenchmark td{font-size:16px;background:transparent}#newBenchmark td:first-child{font-size:13px}#newBenchmark th{color:#666}#newBenchmark tr:last-child td{background:#f1f8f5}
 .views{display:grid;grid-template-columns:1fr 1fr;gap:20px}.view{border:1px solid #ddd;border-radius:8px;overflow:hidden;background:white}.viewbar{display:flex;justify-content:space-between;padding:13px 16px;font-size:13px}.viewbar b{font-weight:500}.viewbar span{font:12px Consolas,monospace;color:#777}canvas{display:block;width:100%;aspect-ratio:1;background:#f6f7f6}.playback{display:flex;align-items:center;gap:14px;margin:18px 0}.playback input{flex:1;accent-color:#08775a}.livebadge{font-size:11px;color:#08775a}.viewfoot{display:flex;justify-content:space-between;padding:10px 16px;font:12px Consolas,monospace;color:#666}@media(max-width:650px){.views{gap:8px}.viewbar{padding:10px;font-size:11px}.viewfoot{padding:8px;font-size:10px}}@media print{.playback{display:none}}
 </style>
@@ -16,7 +17,7 @@
 <section class="view"><div class="viewbar"><b>No forecast</b><span id="clock0">Starting</span></div><canvas id="canvas0" width="600" height="600" aria-label="Live SUMO intersection without forecasting"></canvas><div class="viewfoot"><span id="vehicles0">0 vehicles</span><span id="queue0">Queue 0</span></div></section>
 <section class="view"><div class="viewbar"><b>With forecast</b><span id="clock1">Starting</span></div><canvas id="canvas1" width="600" height="600" aria-label="Live SUMO intersection with forecasting"></canvas><div class="viewfoot"><span id="vehicles1">0 vehicles</span><span id="queue1">Queue 0</span></div></section>
 </div>
-<div class="playback" id="playback"><button id="play">Replay</button><input id="timeline" type="range" min="0" step="1" value="0" aria-label="Replay time"><span id="replayTime" class="livebadge"></span></div>
+<div class="playback" id="playback"><button id="play">Replay</button><select id="speed" aria-label="Replay speed"><option value="5">5×</option><option value="20" selected>20×</option><option value="60">60×</option></select><input id="timeline" type="range" min="0" step="1" value="0" aria-label="Replay time"><span id="replayTime" class="livebadge"></span></div>
 <div class="tablewrap" id="metricsBlock"><table><thead id="head"></thead><tbody id="metrics"></tbody></table></div>
 <p id="note"></p>
 <section class="chart" id="queueHistory"><h2>Queue / vehicles</h2><div class="legend" id="legend"></div><div id="chart"></div></section>
@@ -98,5 +99,5 @@ if(D.live_mode){
   catch(e){$("status").textContent="Connection lost";}setTimeout(poll,200);
  }poll();
 }else if(replayEnd){showReplay();}else{$("views").hidden=true;$("playback").hidden=true;}
-function animate(now){const dt=Math.min((now-last)/1000,.1);last=now;if(playing){replayT=Math.min(replayEnd,replayT+dt*5);$("timeline").value=replayT;showReplay();if(replayT>=replayEnd){playing=false;$("play").textContent="Replay";}}draw(0,now);draw(1,now);requestAnimationFrame(animate);}requestAnimationFrame(animate);
+function animate(now){const dt=Math.min((now-last)/1000,.1);last=now;if(playing){replayT=Math.min(replayEnd,replayT+dt*Number($("speed").value));$("timeline").value=replayT;showReplay();if(replayT>=replayEnd){playing=false;$("play").textContent="Replay";}}draw(0,now);draw(1,now);requestAnimationFrame(animate);}requestAnimationFrame(animate);
 </script></html>
