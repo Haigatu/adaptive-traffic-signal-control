@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ATSC | Results</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fafafa;color:#191919;font:15px Arial,sans-serif}main{max-width:1000px;margin:auto;padding:48px 28px}header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ddd;padding-bottom:22px}h1{font-size:22px;letter-spacing:-.7px;margin:0}button,select{font:inherit;background:transparent;border:1px solid #ccc;padding:8px 12px;border-radius:5px;cursor:pointer}p,small{color:#777;font-size:12px;line-height:1.6}.meta{display:flex;gap:24px;flex-wrap:wrap;padding:20px 0}.meta strong{color:#222;font-weight:500}table{border-collapse:collapse;width:100%;margin-top:16px}th,td{padding:23px 14px;border-bottom:1px solid #e5e5e5;text-align:right}th{font-size:12px;font-weight:normal;color:#666}td{font:26px Consolas,monospace;letter-spacing:-1px}th:first-child,td:first-child{text-align:left}td:first-child{font:14px Arial,sans-serif;letter-spacing:0}th:nth-child(3){color:#0a775b}td:nth-child(3){background:#f1f8f5}td:last-child{font-size:16px}.good{color:#08775a}.bad{color:#b34838}.tablewrap{overflow:auto}.chart{margin-top:40px}h2{font-size:14px;font-weight:500}.legend{display:flex;gap:25px;font-size:12px;color:#666}.legend span:before{content:"";display:inline-block;width:18px;height:2px;vertical-align:middle;margin-right:7px;background:var(--c)}svg{width:100%;height:auto;display:block;margin-top:16px}footer{border-top:1px solid #ddd;margin-top:32px;padding-top:16px;font-size:12px;color:#777;display:flex;gap:20px;justify-content:space-between}a{color:inherit}.status{font-size:12px;color:#08775a}.warning{color:#a24b22}details{margin-top:26px;font-size:12px;color:#777}summary{cursor:pointer}code{overflow-wrap:anywhere}#benchmark select{margin-top:14px}#benchmark td{font-size:16px}#benchmark td:first-child{font-size:13px}@media(max-width:650px){main{padding:25px 14px}td{font-size:20px;padding:18px 9px}th{padding:16px 9px}.meta{gap:12px}footer{flex-wrap:wrap}}@media print{button{display:none}main{padding:0}.chart{break-inside:avoid}}
+</style>
+<main><header><h1>ATSC / Results</h1><button onclick="window.print()">Print / PDF</button></header>
+<div class="meta" id="meta"></div>
+<style>
+[hidden]{display:none!important}
+.views{display:grid;grid-template-columns:1fr 1fr;gap:20px}.view{border:1px solid #ddd;border-radius:8px;overflow:hidden;background:white}.viewbar{display:flex;justify-content:space-between;padding:13px 16px;font-size:13px}.viewbar b{font-weight:500}.viewbar span{font:12px Consolas,monospace;color:#777}canvas{display:block;width:100%;aspect-ratio:1;background:#f6f7f6}.playback{display:flex;align-items:center;gap:14px;margin:18px 0}.playback input{flex:1;accent-color:#08775a}.livebadge{font-size:11px;color:#08775a}.viewfoot{display:flex;justify-content:space-between;padding:10px 16px;font:12px Consolas,monospace;color:#666}@media(max-width:650px){.views{gap:8px}.viewbar{padding:10px;font-size:11px}.viewfoot{padding:8px;font-size:10px}}@media print{.playback{display:none}}
+</style>
+<div class="views" id="views">
+<section class="view"><div class="viewbar"><b>No forecast</b><span id="clock0">Starting</span></div><canvas id="canvas0" width="600" height="600" aria-label="Live SUMO intersection without forecasting"></canvas><div class="viewfoot"><span id="vehicles0">0 vehicles</span><span id="queue0">Queue 0</span></div></section>
+<section class="view"><div class="viewbar"><b>With forecast</b><span id="clock1">Starting</span></div><canvas id="canvas1" width="600" height="600" aria-label="Live SUMO intersection with forecasting"></canvas><div class="viewfoot"><span id="vehicles1">0 vehicles</span><span id="queue1">Queue 0</span></div></section>
+</div>
+<div class="playback" id="playback"><button id="play">Replay</button><input id="timeline" type="range" min="0" step="1" value="0" aria-label="Replay time"><span id="replayTime" class="livebadge"></span></div>
+<div class="tablewrap" id="metricsBlock"><table><thead id="head"></thead><tbody id="metrics"></tbody></table></div>
+<p id="note"></p>
+<section class="chart" id="queueHistory"><h2>Queue / vehicles</h2><div class="legend" id="legend"></div><div id="chart"></div></section>
+<details id="benchmark"><summary>Saved benchmark / 60 runs</summary><select id="load" aria-label="Load"><option value="0.4">Load 0.40</option><option value="0.7" selected>Load 0.70</option><option value="0.95">Load 0.95</option></select><div class="tablewrap"><table><thead><tr><th>Controller</th><th>Delay, s</th><th>Arrivals</th><th>Max red, s</th></tr></thead><tbody id="saved"></tbody></table></div><p>4 demand seeds per load / 3,600 s per run / separate from this demo.</p></details>
+<details><summary>Run details</summary><p id="details"></p></details>
+<footer><span id="status"></span><a href="summary.json">Run data</a><span>SUMO / TraCI / D3QN</span></footer></main>
+<script id="report-data" type="application/json">__REPORT_DATA__</script>
+<script>
+"use strict";
+const D=JSON.parse(document.getElementById("report-data").textContent),R=D.run,$=id=>document.getElementById(id),pair=R.mode==="paired";
+const fmt=(n,d=1)=>Number.isFinite(n)?n.toLocaleString("en-US",{maximumFractionDigits:d}):"--";
+const runs=pair?[R.runs.no_forecast,R.runs.forecast]:[R];
+const names=pair?["No forecast","With forecast"]:[R.agent==="no_forecast"?"No forecast":R.agent==="guarded"?"Guarded D3QN":"With forecast"];
+const traces=pair?[D.pair.no_forecast||[],D.pair.forecast||[]]:[D.decisions||[]];
+const measures=[["Delay / requested vehicle","s","delay_per_requested_vehicle_s",-1],["Arrivals","vehicles","throughput",1],["Average queue","vehicles","mean_queue_vehicles",-1],["Total stopped time","vehicle-seconds","waiting_vehicle_s",-1],["CO2","kg","co2_kg",-1],["Phase switches","","switches",0]];
+$("meta").innerHTML=`<small>SEED <strong>${R.seed}</strong></small><small>LOAD <strong>${fmt(R.saturation,2)}</strong></small><small>DURATION <strong>${fmt(R.duration,0)} s</strong></small><small>WARM-UP <strong>${fmt(R.warmup,0)} s</strong></small>`;
+$("head").innerHTML=`<tr><th>Metric</th>${names.map(n=>`<th>${n}</th>`).join("")}${pair?"<th>Change</th>":""}</tr>`;
+$("metrics").innerHTML=measures.map(([label,unit,key,direction])=>{const vals=runs.map(r=>r.metrics?.[key]);const change=vals[0]>0&&Number.isFinite(vals[1])?100*(vals[1]/vals[0]-1):null;const cls=change===null||!direction?"":change*direction>0?"good":change*direction<0?"bad":"";return `<tr><td>${label}<br><small>${unit}</small></td>${vals.map(v=>`<td>${fmt(v,key==="throughput"||key==="switches"?0:1)}</td>`).join("")}${pair?`<td class="${cls}">${change===null?"--":`${change>0?"+":""}${fmt(change)}%`}</td>`:""}</tr>`;}).join("");
+$("note").textContent=(pair?"Same demand / synchronized steps / measured in this run. ":"")+(R.warmup<3600?"Short warm-up: incomplete forecast history. ":"")+"Delay is a speed-loss proxy, not travel time.";
+$("status").textContent=R.status==="completed"?"Completed":"Incomplete run";$("status").className=R.status==="completed"?"status":"warning";
+const colors=["#9a9a9a","#08775a"];
+$("legend").innerHTML=names.map((n,i)=>`<span style="--c:${colors[i]}">${n}</span>`).join("");
+const w=900,h=220,L=45,T=12,B=32,total=Math.max(1,...traces.flatMap(t=>t.map(s=>s.elapsed))),max=Math.max(1,...traces.flatMap(t=>t.map(s=>s.queue.reduce((a,b)=>a+b,0))));
+let graph="";for(let i=0;i<=4;i++){const yy=h-B-(h-B-T)*i/4;graph+=`<line x1="${L}" y1="${yy}" x2="895" y2="${yy}" stroke="#e3e3e3"/><text x="35" y="${yy+4}" text-anchor="end" font-size="11" fill="#777">${fmt(max*i/4,0)}</text>`;}
+graph+=traces.map((t,i)=>`<polyline fill="none" stroke="${colors[i]}" stroke-width="2" points="${t.map(s=>`${L+(w-L-5)*s.elapsed/total},${h-B-(h-B-T)*s.queue.reduce((a,b)=>a+b,0)/max}`).join(" ")}"/>`).join("");
+graph+=`<text x="${L}" y="215" font-size="11" fill="#777">0 s</text><text x="895" y="215" text-anchor="end" font-size="11" fill="#777">${fmt(total)} s</text>`;
+$("chart").innerHTML=traces.some(t=>t.length)?`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Queue comparison">${graph}</svg>`:"<p>No recorded decisions</p>";
+const labels={webster:"Webster",max_pressure:"Max Pressure",d3qn_original:"D3QN",d3qn_guard_only:"D3QN + guard",d3qn_guard_trained:"Fine-tuned D3QN + guard"};
+function saved(){const rows=D.groups.filter(r=>r.saturation===Number($("load").value));$("saved").innerHTML=rows.map(r=>`<tr><td>${labels[r.controller]}</td><td>${fmt(r.delay_per_requested_vehicle_s)}</td><td>${fmt(r.throughput,0)}</td><td>${fmt(r.max_without_green_s)}</td></tr>`).join("");}
+if([0.4,0.7,0.95].includes(R.saturation))$("load").value=String(R.saturation);
+$("load").addEventListener("change",saved);saved();
+$("details").textContent=runs.map((r,i)=>`${names[i]}: ${r.checkpoint_sha256||"no checkpoint hash"}`).join(" | ")+(pair?" | Same-route SHA-256: "+R.runs.forecast.route_sha256:"");
+const latest=[null,null],prior=[null,null],updated=[0,0],keys=["no_forecast","forecast"];
+function frame(i,f){
+ if(!f)return;
+ if(f.stage==="warmup"){$("clock"+i).textContent=`Warm-up ${Math.round(100*f.time/f.warmup)}%`;return;}
+ if(f.stage!=="running")return;
+ prior[i]=latest[i];latest[i]=f;updated[i]=performance.now();
+ $("clock"+i).textContent=`${fmt(f.time,0)} s`;
+ $("vehicles"+i).textContent=`${f.vehicles.length} vehicles`;
+ $("queue"+i).textContent=`Queue ${f.queue.reduce((a,b)=>a+b,0)}`;
+}
+function draw(i,now){
+ const c=$("canvas"+i),ctx=c.getContext("2d"),f=latest[i],scale=600/240;
+ ctx.clearRect(0,0,600,600);ctx.fillStyle="#f6f7f6";ctx.fillRect(0,0,600,600);
+ ctx.save();ctx.translate(300,300);ctx.scale(scale,scale);
+ ctx.fillStyle="#e0e4e2";ctx.fillRect(-120,-11,240,22);ctx.fillRect(-11,-120,22,240);
+ ctx.strokeStyle="#fff";ctx.lineWidth=.55;ctx.setLineDash([3,3]);
+ for(const o of [-6.4,-3.2,3.2,6.4]){ctx.beginPath();ctx.moveTo(-120,o);ctx.lineTo(-15,o);ctx.moveTo(15,o);ctx.lineTo(120,o);ctx.moveTo(o,-120);ctx.lineTo(o,-15);ctx.moveTo(o,15);ctx.lineTo(o,120);ctx.stroke();}
+ ctx.setLineDash([]);
+ if(f){
+  const old=new Map((prior[i]?.vehicles||[]).map(v=>[v[0],v])),mix=Math.min(1,(now-updated[i])/200);
+  for(const v of f.vehicles){const p=old.get(v[0])||v,x=(p[1]+(v[1]-p[1])*mix)-f.center[0],y=f.center[1]-(p[2]+(v[2]-p[2])*mix);if(Math.abs(x)>125||Math.abs(y)>125)continue;ctx.save();ctx.translate(x,y);ctx.rotate((v[3]-90)*Math.PI/180);ctx.fillStyle=v[4]<.1?"#bc6c4b":i===0?"#667b85":"#08775a";ctx.fillRect(-2.5,-1,5,2);ctx.restore();}
+  const lamps=[[-12,-17],[17,-12],[12,17],[-17,12]];
+  lamps.forEach(([x,y],j)=>{const signal=f.signal.slice(j*3,j*3+3);ctx.fillStyle=/[Gg]/.test(signal)?"#16a078":/[Yy]/.test(signal)?"#e6aa33":"#ca5c4a";ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);ctx.fill();});
+ }
+ ctx.restore();ctx.fillStyle="#859089";ctx.font="12px Arial";ctx.textAlign="center";ctx.fillText("N",300,19);ctx.fillText("S",300,590);ctx.fillText("W",12,305);ctx.fillText("E",588,305);
+}
+let playing=false,replayT=0,last=performance.now();
+const replays=keys.map(k=>D.replays?.[k]||[]),replayEnd=Math.max(0,...replays.map(r=>r.at(-1)?.time||0));
+$("timeline").max=replayEnd;replayT=replayEnd;$("timeline").value=replayEnd;
+function showReplay(){replays.forEach((frames,i)=>{let chosen=frames[0];for(const f of frames){if(f.time>replayT)break;chosen=f;}if(chosen&&latest[i]!==chosen)frame(i,chosen);});$("replayTime").textContent=`${fmt(replayT,0)} / ${fmt(replayEnd,0)} s`; }
+$("play").onclick=()=>{if(replayT>=replayEnd)replayT=0;playing=!playing;$("play").textContent=playing?"Pause":"Replay";};
+$("timeline").oninput=e=>{playing=false;replayT=Number(e.target.value);$("play").textContent="Replay";showReplay();};
+if(D.live_mode){
+ $("playback").hidden=true;
+ $("metricsBlock").hidden=true;$("queueHistory").hidden=true;$("benchmark").hidden=true;
+ $("note").textContent="Live SUMO / identical demand / synchronized clocks";
+ async function poll(){
+  try{const res=await fetch("state.json",{cache:"no-store"});if(!res.ok)throw Error("Disconnected");const state=await res.json();keys.forEach((k,i)=>frame(i,state.live[k]));$("status").textContent=state.run.status==="failed"?"Simulation failed":"Live";if(state.run.status==="completed"){location.replace("results.html");return;}}
+  catch(e){$("status").textContent="Connection lost";}setTimeout(poll,200);
+ }poll();
+}else if(replayEnd){showReplay();}else{$("views").hidden=true;$("playback").hidden=true;}
+function animate(now){const dt=Math.min((now-last)/1000,.1);last=now;if(playing){replayT=Math.min(replayEnd,replayT+dt*5);$("timeline").value=replayT;showReplay();if(replayT>=replayEnd){playing=false;$("play").textContent="Replay";}}draw(0,now);draw(1,now);requestAnimationFrame(animate);}requestAnimationFrame(animate);
+</script></html>

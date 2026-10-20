@@ -1,0 +1,4 @@
+numpy>=1.26
+torch>=2.5
+traci==1.27.1
+sumolib==1.27.1

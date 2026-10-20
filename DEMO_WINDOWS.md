@@ -1,0 +1,93 @@
+# Windows demo
+
+## Start
+
+After running `setup.cmd` and setting `SUMO_HOME`, run:
+
+```powershell
+.\demo.cmd
+```
+
+A local website opens with two side-by-side live intersections. The left panel
+uses D3QN without forecasting; the right uses D3QN with TGCN. Both use identical
+demand and synchronized 0.5-second simulation steps. Vehicles and signals come
+from actual SUMO via TraCI, rendered on canvas. After completion the same page
+shows a replay, numeric results and percentage differences.
+
+To additionally show the native SUMO windows:
+
+```powershell
+.\demo.cmd --sumo-gui
+```
+
+## Options
+
+| Option | Default | Meaning |
+| --- | --- | --- |
+| `--duration` | 300 | Measured simulation seconds |
+| `--warmup` | 3600 | Simulated seconds of forecast-history collection |
+| `--delay` | 50 | Additional milliseconds per simulation step |
+| `--seed` | 1000 | Shared demand and SUMO seed |
+| `--saturation` | 0.7 | Shared nominal traffic load, greater than 0 and at most 1 |
+| `--sumo-gui` | off | Also open the two native SUMO-GUI windows |
+| `--no-browser` | off | Generate results without opening the browser |
+
+Warm-up uses the original cyclic controller and no presentation delay.
+Wait for **AI ACTIVE** before presenting the learned policy. A shortened
+warm-up is useful for smoke tests but does not provide the full forecast history.
+Changing total scenario duration also changes the generated demand profile;
+only compare policies within the same paired run.
+
+Each window has its own log and SUMO connection. A synchronization barrier
+keeps both simulation clocks aligned even when one policy switches after
+10 seconds and the other uses a 13-second green/yellow decision interval.
+The controller verifies every recorded signal against its chosen action
+and checks that SUMO is using the external `online` signal program.
+
+## Results
+
+Output: `demo_runs/<timestamp>_paired_<id>/results.html`.
+The page shows two intersection replays, key metrics, percentage changes,
+and two queue traces. Use Replay and the timeline slider after completion.
+A collapsed section retains the historical 60-run benchmark. It is separate
+from the current live comparison.
+
+```powershell
+# Reopen the latest completed report
+.\.venv\Scripts\python.exe -m atsc.demo_report
+
+# Open a specific report
+.\.venv\Scripts\python.exe -m atsc.demo_report --run demo_runs/<run>
+
+# Optional single-window guarded continuation
+.\.venv\Scripts\python.exe -m atsc.demo --agent guarded
+```
+
+The paired comparison uses original, separately trained 40-input and 52-input
+policies. It does not claim a causal improvement from forecasting alone.
+The guarded continuation adds clocks and a 120-second no-green constraint;
+that is an independent experiment, not the right-hand policy in the default demo.
+
+## Troubleshooting
+
+- **SUMO not found:** set `SUMO_HOME` to the installation root, e.g. `D:\SUMO`.
+  Executables are searched in `SUMO_HOME/bin`, PATH, and the `eclipse-sumo` package.
+- **Missing PeMS08:** run `python -m atsc.prepare_demo`. The download must match
+  the SHA-256 in the existing manifest. No training is performed.
+- **No cars initially:** vehicles take time to reach the central intersection.
+  Retain the default full warm-up for presentations.
+- **Slow warm-up:** TraCI communicates over local TCP. Two synchronized simulations
+  and per-vehicle metrics can take several real minutes on slower computers.
+- **Connection denied:** allow local Python-to-SUMO TCP connections.
+- **One window paused:** both clocks wait at the synchronization barrier. Resume
+  within 120 seconds; longer pauses fail with an explicit timeout.
+- **One window closed:** the comparison fails rather than reporting a valid paired
+  result. Child logs are retained; rerun the command.
+- **Small display:** resize or move the SUMO windows manually. Initial size is
+  760 x 800 pixels at positions (0, 0) and (770, 0).
+
+The live page uses a local server bound only to 127.0.0.1 on a free port.
+Keep the terminal open; Ctrl+C stops the server. The saved HTML replay needs
+no server, CDN, account, or internet connection.
+Use Print / PDF to export it. Simulation outputs and weights are separate:
+launching the demo never trains or writes checkpoints.

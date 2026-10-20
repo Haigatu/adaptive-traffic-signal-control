@@ -3,17 +3,29 @@
 from pathlib import Path
 import subprocess, xml.etree.ElementTree as ET, uuid
 import numpy as np
-import sumo
+import os
+import shutil
+import importlib.util
 from .data import ROOT, load
 
 DIRECTIONS = ["N", "E", "S", "W"]
 
 
 def binary(name):
-    candidate = Path(sumo.__file__).parent / "bin" / name
-    if not candidate.exists():
-        candidate = candidate.with_suffix(".exe")
-    return str(candidate)
+    candidates = []
+    if os.environ.get("SUMO_HOME"):
+        candidates.append(Path(os.environ["SUMO_HOME"]) / "bin" / name)
+    found = shutil.which(name)
+    if found:
+        candidates.append(Path(found))
+    spec = importlib.util.find_spec("sumo")
+    if spec and spec.origin:
+        candidates.append(Path(spec.origin).parent / "bin" / name)
+    for candidate in candidates:
+        for path in (candidate, candidate.with_suffix(".exe")):
+            if path.is_file():
+                return str(path)
+    raise FileNotFoundError(f"Cannot find {name}; set SUMO_HOME or add SUMO/bin to PATH")
 
 
 def build():
@@ -102,8 +114,8 @@ def build():
     return out
 
 
-def make_routes(seed, saturation, end=7200, split="train"):
-    root = ROOT / "data" / "runs"
+def make_routes(seed, saturation, end=7200, split="train", output_dir=None):
+    root = Path(output_dir) if output_dir else ROOT / "data" / "runs"
     root.mkdir(exist_ok=True)
     path = root / f"{split}_{seed}_{saturation:.2f}_{end}.rou.xml"
     rng = np.random.default_rng(seed)
