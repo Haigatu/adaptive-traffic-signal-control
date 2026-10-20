@@ -1,0 +1,18 @@
+{
+  "selected_weight": 1.0,
+  "candidate_weights_evaluated": [
+    0.5,
+    1.0
+  ],
+  "passes_delay_and_conflict_gate": false,
+  "reference": {
+    "delay_per_requested_vehicle_s": 203.83216434991664,
+    "conflicts_per_1000_arrivals": 557.2798204554739
+  },
+  "safety_candidate": {
+    "delay_per_requested_vehicle_s": 774.608612865314,
+    "conflicts_per_1000_arrivals": 454.80579726961594
+  },
+  "selection_split": "tune only",
+  "note": "Pilot compares one safety weight. Full 0/.25/.5/.75 sweep is not completed."
+}

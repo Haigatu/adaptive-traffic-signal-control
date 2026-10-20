@@ -1,0 +1,158 @@
+[
+  {
+    "saturation": 0.4,
+    "comparison": "d3qn_original",
+    "paired_delay_differences_s": [
+      23.997208747738753,
+      15.344873390548344,
+      5.284494871834653,
+      -15.3754974233359
+    ],
+    "mean_difference_s": 7.312769896696462,
+    "relative_mean_change_pct": 6.945509937961947,
+    "note": "Descriptive only: four demand seeds, one trained policy."
+  },
+  {
+    "saturation": 0.4,
+    "comparison": "d3qn_guard_only",
+    "paired_delay_differences_s": [
+      33.13881604077092,
+      44.69110365374195,
+      35.8362086750376,
+      30.225261572222053
+    ],
+    "mean_difference_s": 35.972847485443125,
+    "relative_mean_change_pct": 46.94499357090953,
+    "note": "Descriptive only: four demand seeds, one trained policy."
+  },
+  {
+    "saturation": 0.4,
+    "comparison": "webster",
+    "paired_delay_differences_s": [
+      50.4935471093213,
+      94.37803856691289,
+      86.51704686977342,
+      71.5467854258443
+    ],
+    "mean_difference_s": 75.73385449296298,
+    "relative_mean_change_pct": 205.42647518548418,
+    "note": "Descriptive only: four demand seeds, one trained policy."
+  },
+  {
+    "saturation": 0.4,
+    "comparison": "max_pressure",
+    "paired_delay_differences_s": [
+      78.68990544979809,
+      97.45671985619741,
+      88.4429929101571,
+      75.01207337848425
+    ],
+    "mean_difference_s": 84.9004228986592,
+    "relative_mean_change_pct": 306.49884640312024,
+    "note": "Descriptive only: four demand seeds, one trained policy."
+  },
+  {
+    "saturation": 0.7,
+    "comparison": "d3qn_original",
+    "paired_delay_differences_s": [
+      -104.31920452254556,
+      -15.927096726876655,
+      -100.81623630728926,
+      -169.99451166937104
+    ],
+    "mean_difference_s": -97.76426230652064,
+    "relative_mean_change_pct": -44.80360606788886,
+    "note": "Descriptive only: four demand seeds, one trained policy."
+  },
+  {
+    "saturation": 0.7,
+    "comparison": "d3qn_guard_only",
+    "paired_delay_differences_s": [
+      -7.962133058336946,
+      -24.083352559596435,
+      -45.09443212528562,
+      -67.74234041629298
+    ],
+    "mean_difference_s": -36.220564539878,
+    "relative_mean_change_pct": -23.12011856373456,
+    "note": "Descriptive only: four demand seeds, one trained policy."
+  },
+  {
+    "saturation": 0.7,
+    "comparison": "webster",
+    "paired_delay_differences_s": [
+      -23.02946679281945,
+      36.64474143585947,
+      20.674949701438692,
+      28.331844645820397
+    ],
+    "mean_difference_s": 15.655517247574778,
+    "relative_mean_change_pct": 14.940401467337772,
+    "note": "Descriptive only: four demand seeds, one trained policy."
+  },
+  {
+    "saturation": 0.7,
+    "comparison": "max_pressure",
+    "paired_delay_differences_s": [
+      1.949919825574142,
+      -19.394089401455247,
+      -58.62731118770084,
+      -97.77655133814777
+    ],
+    "mean_difference_s": -43.462008025432425,
+    "relative_mean_change_pct": -26.516749392430782,
+    "note": "Descriptive only: four demand seeds, one trained policy."
+  },
+  {
+    "saturation": 0.95,
+    "comparison": "d3qn_original",
+    "paired_delay_differences_s": [
+      -89.90362989658723,
+      -126.99717547527734,
+      -112.1739220971267,
+      -10.974300020177793
+    ],
+    "mean_difference_s": -85.01225687229227,
+    "relative_mean_change_pct": -11.108848481181644,
+    "note": "Descriptive only: four demand seeds, one trained policy."
+  },
+  {
+    "saturation": 0.95,
+    "comparison": "d3qn_guard_only",
+    "paired_delay_differences_s": [
+      -150.10867365934263,
+      -214.81595148206657,
+      -250.59905437342866,
+      -137.55613894620626
+    ],
+    "mean_difference_s": -188.269954615261,
+    "relative_mean_change_pct": -21.677004668588694,
+    "note": "Descriptive only: four demand seeds, one trained policy."
+  },
+  {
+    "saturation": 0.95,
+    "comparison": "webster",
+    "paired_delay_differences_s": [
+      -47.26474734126771,
+      127.10592149448837,
+      28.746076096872343,
+      107.98718162214948
+    ],
+    "mean_difference_s": 54.14360796806062,
+    "relative_mean_change_pct": 8.647615190818026,
+    "note": "Descriptive only: four demand seeds, one trained policy."
+  },
+  {
+    "saturation": 0.95,
+    "comparison": "max_pressure",
+    "paired_delay_differences_s": [
+      -143.2265151189062,
+      -161.01867617585253,
+      -258.4709817166532,
+      -181.01553193065683
+    ],
+    "mean_difference_s": -185.9329262355172,
+    "relative_mean_change_pct": -21.465684132208164,
+    "note": "Descriptive only: four demand seeds, one trained policy."
+  }
+]

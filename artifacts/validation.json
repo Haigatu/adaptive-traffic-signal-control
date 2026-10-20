@@ -1,0 +1,12 @@
+{
+  "functional_tests": 5,
+  "training_episodes_per_agent": 30,
+  "test_runs": 150,
+  "tuning_runs": 20,
+  "test_cases_per_controller_per_load": 10,
+  "collisions": 0,
+  "teleports": 0,
+  "replay_frames": 317,
+  "all_checkpoint_weights_finite": true,
+  "evaluation_controller_hashes_match": true
+}

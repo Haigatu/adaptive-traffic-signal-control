@@ -1,0 +1,1 @@
+<nodes><node id="J" x="0" y="0" type="traffic_light" /><node id="N" x="0" y="600" type="priority" /><node id="E" x="600" y="0" type="priority" /><node id="S" x="0" y="-600" type="priority" /><node id="W" x="-600" y="0" type="priority" /></nodes>

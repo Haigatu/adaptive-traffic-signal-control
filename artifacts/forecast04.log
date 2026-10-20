@@ -1,0 +1,30 @@
+PEMS04 tgcn {'epoch': 1, 'train_mae': 23.82853532088504, 'validation_mae': 23.49604606628418, 'seconds': 13.161098003387451}
+PEMS04 tgcn {'epoch': 2, 'train_mae': 22.440607267775274, 'validation_mae': 23.363927841186523, 'seconds': 32.547362327575684}
+PEMS04 tgcn {'epoch': 3, 'train_mae': 22.272059098233377, 'validation_mae': 23.140214920043945, 'seconds': 47.213337421417236}
+PEMS04 tgcn {'epoch': 4, 'train_mae': 21.97665876103787, 'validation_mae': 22.740419387817383, 'seconds': 60.3673677444458}
+PEMS04 tgcn {'epoch': 5, 'train_mae': 21.627098738108767, 'validation_mae': 22.394500732421875, 'seconds': 72.73855710029602}
+PEMS04 tgcn {'epoch': 6, 'train_mae': 21.354297651035616, 'validation_mae': 22.1658935546875, 'seconds': 87.05575275421143}
+RESULT {"dataset": "PEMS04", "model": "tgcn", "seed": 42, "epochs_requested": 6, "train_stride": 3, "train_samples": 3394, "validation_stride": 3, "test_samples": 3397, "nodes": 307, "train_end": 10195, "validation_end": 13593, "time_points": 16992, "training_seconds": 90.83262729644775, "mae": 21.470731735229492, "rmse": 33.937164306640625, "mape_nonzero_percent": 14.484628677368164, "mape_coverage": 0.9870036057235148, "horizon_mae": [19.713224411010742, 21.343238830566406, 23.35572624206543]}
+PEMS04 gru {'epoch': 1, 'train_mae': 23.88336811890231, 'validation_mae': 23.4879093170166, 'seconds': 25.172729015350342}
+PEMS04 gru {'epoch': 2, 'train_mae': 22.399996802828497, 'validation_mae': 23.303081512451172, 'seconds': 48.699132442474365}
+PEMS04 gru {'epoch': 3, 'train_mae': 22.185653504856965, 'validation_mae': 23.010271072387695, 'seconds': 67.99389052391052}
+PEMS04 gru {'epoch': 4, 'train_mae': 21.82950722715364, 'validation_mae': 22.541118621826172, 'seconds': 94.16564273834229}
+PEMS04 gru {'epoch': 5, 'train_mae': 21.33601871541472, 'validation_mae': 22.015493392944336, 'seconds': 116.87385392189026}
+PEMS04 gru {'epoch': 6, 'train_mae': 20.888051250057938, 'validation_mae': 21.62652015686035, 'seconds': 138.88485264778137}
+RESULT {"dataset": "PEMS04", "model": "gru", "seed": 42, "epochs_requested": 6, "train_stride": 3, "train_samples": 3394, "validation_stride": 3, "test_samples": 3397, "nodes": 307, "train_end": 10195, "validation_end": 13593, "time_points": 16992, "training_seconds": 148.71730494499207, "mae": 20.94725799560547, "rmse": 33.140174865722656, "mape_nonzero_percent": 14.08798885345459, "mape_coverage": 0.9870036057235148, "horizon_mae": [18.89763069152832, 20.90058708190918, 23.04355812072754]}
+PEMS04 lstm {'epoch': 1, 'train_mae': 24.00308522943179, 'validation_mae': 23.520763397216797, 'seconds': 19.424252033233643}
+PEMS04 lstm {'epoch': 2, 'train_mae': 22.46301804307799, 'validation_mae': 23.40981674194336, 'seconds': 39.42107009887695}
+PEMS04 lstm {'epoch': 3, 'train_mae': 22.291038584228698, 'validation_mae': 23.085447311401367, 'seconds': 58.920119524002075}
+PEMS04 lstm {'epoch': 4, 'train_mae': 21.768244576700855, 'validation_mae': 22.231874465942383, 'seconds': 78.30855178833008}
+PEMS04 lstm {'epoch': 5, 'train_mae': 20.926123929668286, 'validation_mae': 21.42365264892578, 'seconds': 98.66100311279297}
+PEMS04 lstm {'epoch': 6, 'train_mae': 20.413085108072195, 'validation_mae': 21.095487594604492, 'seconds': 118.85093259811401}
+RESULT {"dataset": "PEMS04", "model": "lstm", "seed": 42, "epochs_requested": 6, "train_stride": 3, "train_samples": 3394, "validation_stride": 3, "test_samples": 3397, "nodes": 307, "train_end": 10195, "validation_end": 13593, "time_points": 16992, "training_seconds": 122.13630604743958, "mae": 20.485519409179688, "rmse": 32.40563201904297, "mape_nonzero_percent": 13.514793395996094, "mape_coverage": 0.9870036057235148, "horizon_mae": [18.681400299072266, 20.51325798034668, 22.261898040771484]}
+PEMS04 mlp {'epoch': 1, 'train_mae': 23.478847788503217, 'validation_mae': 23.10808563232422, 'seconds': 0.6395964622497559}
+PEMS04 mlp {'epoch': 2, 'train_mae': 21.299598198140828, 'validation_mae': 21.76953887939453, 'seconds': 1.4790427684783936}
+PEMS04 mlp {'epoch': 3, 'train_mae': 20.43718539289851, 'validation_mae': 21.043933868408203, 'seconds': 2.2202506065368652}
+PEMS04 mlp {'epoch': 4, 'train_mae': 20.18516574207265, 'validation_mae': 20.910802841186523, 'seconds': 3.0203728675842285}
+PEMS04 mlp {'epoch': 5, 'train_mae': 20.09548064520024, 'validation_mae': 20.79222869873047, 'seconds': 3.96771502494812}
+PEMS04 mlp {'epoch': 6, 'train_mae': 20.009513560427692, 'validation_mae': 20.77592658996582, 'seconds': 4.783926486968994}
+RESULT {"dataset": "PEMS04", "model": "mlp", "seed": 42, "epochs_requested": 6, "train_stride": 3, "train_samples": 3394, "validation_stride": 3, "test_samples": 3397, "nodes": 307, "train_end": 10195, "validation_end": 13593, "time_points": 16992, "training_seconds": 5.426646709442139, "mae": 20.165306091308594, "rmse": 31.92157554626465, "mape_nonzero_percent": 13.348039627075195, "mape_coverage": 0.9870036057235148, "horizon_mae": [18.56785011291504, 20.16620445251465, 21.761857986450195]}
+RESULT {"dataset": "PEMS04", "model": "ha", "seed": 42, "epochs_requested": 0, "train_stride": 3, "train_samples": 3394, "validation_stride": 3, "test_samples": 3397, "nodes": 307, "train_end": 10195, "validation_end": 13593, "time_points": 16992, "training_seconds": 0.06329965591430664, "mae": 38.86258316040039, "rmse": 59.647518157958984, "mape_nonzero_percent": 27.845012664794922, "mape_coverage": 0.9870036057235148, "horizon_mae": [38.87108612060547, 38.86283493041992, 38.853824615478516]}
+RESULT {"dataset": "PEMS04", "model": "persistence", "seed": 42, "epochs_requested": 0, "train_stride": 3, "train_samples": 3394, "validation_stride": 3, "test_samples": 3397, "nodes": 307, "train_end": 10195, "validation_end": 13593, "time_points": 16992, "training_seconds": 0.027387619018554688, "mae": 22.8306827545166, "rmse": 36.62623596191406, "mape_nonzero_percent": 14.98459243774414, "mape_coverage": 0.9870036057235148, "horizon_mae": [21.015899658203125, 22.78135871887207, 24.694795608520508]}

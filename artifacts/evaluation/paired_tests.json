@@ -1,0 +1,50 @@
+[
+  {
+    "comparison": "d3qn_forecast vs max_pressure",
+    "saturation": 0.4,
+    "paired_scenarios": 10,
+    "mean_difference_s": 134.05495708013564,
+    "p_two_sided": 0.001953125,
+    "scope": "scenario variability for one training seed; no claim about training-seed robustness"
+  },
+  {
+    "comparison": "d3qn_forecast vs max_pressure",
+    "saturation": 0.7,
+    "paired_scenarios": 10,
+    "mean_difference_s": 22.090713294922786,
+    "p_two_sided": 0.16015625,
+    "scope": "scenario variability for one training seed; no claim about training-seed robustness"
+  },
+  {
+    "comparison": "d3qn_forecast vs max_pressure",
+    "saturation": 0.95,
+    "paired_scenarios": 10,
+    "mean_difference_s": -96.43926062059981,
+    "p_two_sided": 0.001953125,
+    "scope": "scenario variability for one training seed; no claim about training-seed robustness"
+  },
+  {
+    "comparison": "d3qn_forecast vs d3qn_no_forecast",
+    "saturation": 0.4,
+    "paired_scenarios": 10,
+    "mean_difference_s": -19.842645426356263,
+    "p_two_sided": 0.083984375,
+    "scope": "scenario variability for one training seed; no claim about training-seed robustness"
+  },
+  {
+    "comparison": "d3qn_forecast vs d3qn_no_forecast",
+    "saturation": 0.7,
+    "paired_scenarios": 10,
+    "mean_difference_s": -204.4401959352001,
+    "p_two_sided": 0.16015625,
+    "scope": "scenario variability for one training seed; no claim about training-seed robustness"
+  },
+  {
+    "comparison": "d3qn_forecast vs d3qn_no_forecast",
+    "saturation": 0.95,
+    "paired_scenarios": 10,
+    "mean_difference_s": 62.208255438400045,
+    "p_two_sided": 0.083984375,
+    "scope": "scenario variability for one training seed; no claim about training-seed robustness"
+  }
+]

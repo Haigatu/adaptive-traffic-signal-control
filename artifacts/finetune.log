@@ -1,0 +1,21 @@
+counts train 3
+counts train 1
+counts train 5
+counts train 2
+counts train 4
+counts train 7
+counts train 9
+counts train 6
+counts train 8
+counts train 11
+counts train 10
+counts tune 1
+counts tune 3
+counts tune 2
+counts train 12
+counts tune 4
+counts test 1
+counts test 3
+counts test 2
+counts test 4
+{'mae': 9.677340507507324, 'rmse': 12.487017631530762, 'mape_nonzero_percent': 17.611278533935547, 'mape_coverage': 1.0}

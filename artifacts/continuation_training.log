@@ -1,0 +1,37 @@
+validation 0 mean delay 169.456
+/workspace/scratch/8f27c7e7cfe3/atsc_project/atsc/continuation.py:285: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  losses.append(float(loss))
+guarded episode 1 delay 294.16 max red 118.0 seconds 20
+guarded episode 2 delay 206.31 max red 118.0 seconds 40
+guarded episode 3 delay 255.26 max red 120.0 seconds 61
+guarded episode 4 delay 145.45 max red 120.0 seconds 79
+guarded episode 5 delay 107.57 max red 118.0 seconds 93
+guarded episode 6 delay 260.35 max red 118.0 seconds 114
+guarded episode 7 delay 189.88 max red 118.0 seconds 133
+guarded episode 8 delay 151.24 max red 118.0 seconds 149
+guarded episode 9 delay 158.43 max red 120.0 seconds 165
+guarded episode 10 delay 111.44 max red 120.0 seconds 179
+validation 10 mean delay 125.365
+guarded episode 11 delay 126.9 max red 118.0 seconds 240
+guarded episode 12 delay 314.42 max red 118.0 seconds 266
+guarded episode 13 delay 130.89 max red 118.0 seconds 284
+guarded episode 14 delay 124.33 max red 118.0 seconds 299
+guarded episode 15 delay 141.39 max red 118.0 seconds 316
+guarded episode 16 delay 135.87 max red 120.0 seconds 333
+guarded episode 17 delay 123.57 max red 118.0 seconds 350
+guarded episode 18 delay 204.54 max red 119.0 seconds 372
+guarded episode 19 delay 121.43 max red 118.0 seconds 389
+guarded episode 20 delay 111.54 max red 120.0 seconds 404
+validation 20 mean delay 118.022
+guarded episode 21 delay 181.42 max red 118.0 seconds 473
+guarded episode 22 delay 129.13 max red 118.0 seconds 491
+guarded episode 23 delay 234.44 max red 118.0 seconds 517
+guarded episode 24 delay 105.76 max red 118.0 seconds 533
+guarded episode 25 delay 88.38 max red 118.0 seconds 548
+guarded episode 26 delay 173.27 max red 119.0 seconds 567
+guarded episode 27 delay 80.39 max red 118.0 seconds 579
+guarded episode 28 delay 158.52 max red 118.0 seconds 595
+guarded episode 29 delay 79.91 max red 118.0 seconds 606
+guarded episode 30 delay 145.61 max red 118.0 seconds 621
+validation 30 mean delay 114.296

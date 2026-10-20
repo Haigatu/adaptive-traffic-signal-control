@@ -1,0 +1,30 @@
+PEMS08 tgcn {'epoch': 1, 'train_mae': 19.408285484649802, 'validation_mae': 17.891849517822266, 'seconds': 9.74140453338623}
+PEMS08 tgcn {'epoch': 2, 'train_mae': 18.18511493178837, 'validation_mae': 17.839813232421875, 'seconds': 17.19181251525879}
+PEMS08 tgcn {'epoch': 3, 'train_mae': 18.112970311394825, 'validation_mae': 17.771787643432617, 'seconds': 24.55409526824951}
+PEMS08 tgcn {'epoch': 4, 'train_mae': 18.010863300983278, 'validation_mae': 17.65471649169922, 'seconds': 32.22701978683472}
+PEMS08 tgcn {'epoch': 5, 'train_mae': 17.872650426254367, 'validation_mae': 17.552759170532227, 'seconds': 40.50540852546692}
+PEMS08 tgcn {'epoch': 6, 'train_mae': 17.73990949835495, 'validation_mae': 17.425996780395508, 'seconds': 49.27746081352234}
+RESULT {"dataset": "PEMS08", "model": "tgcn", "seed": 42, "epochs_requested": 6, "train_stride": 3, "train_samples": 3567, "validation_stride": 3, "test_samples": 3570, "nodes": 170, "train_end": 10713, "validation_end": 14284, "time_points": 17856, "training_seconds": 51.89074730873108, "mae": 17.198389053344727, "rmse": 26.3723201751709, "mape_nonzero_percent": 11.236019134521484, "mape_coverage": 0.9966194320865601, "horizon_mae": [15.474961280822754, 17.154016494750977, 18.9661922454834]}
+PEMS08 gru {'epoch': 1, 'train_mae': 19.444894133733627, 'validation_mae': 17.87070655822754, 'seconds': 8.07487154006958}
+PEMS08 gru {'epoch': 2, 'train_mae': 18.154216954038546, 'validation_mae': 17.79384994506836, 'seconds': 15.18084192276001}
+PEMS08 gru {'epoch': 3, 'train_mae': 18.046103201619935, 'validation_mae': 17.684782028198242, 'seconds': 21.74432063102722}
+PEMS08 gru {'epoch': 4, 'train_mae': 17.883853725470637, 'validation_mae': 17.507280349731445, 'seconds': 28.559296131134033}
+PEMS08 gru {'epoch': 5, 'train_mae': 17.643451333628658, 'validation_mae': 17.265071868896484, 'seconds': 35.767451763153076}
+PEMS08 gru {'epoch': 6, 'train_mae': 17.35754338399016, 'validation_mae': 17.06495475769043, 'seconds': 44.39406967163086}
+RESULT {"dataset": "PEMS08", "model": "gru", "seed": 42, "epochs_requested": 6, "train_stride": 3, "train_samples": 3567, "validation_stride": 3, "test_samples": 3570, "nodes": 170, "train_end": 10713, "validation_end": 14284, "time_points": 17856, "training_seconds": 46.43359613418579, "mae": 16.795042037963867, "rmse": 25.760263442993164, "mape_nonzero_percent": 11.37092399597168, "mape_coverage": 0.9966194320865601, "horizon_mae": [14.884033203125, 16.74742889404297, 18.753662109375]}
+PEMS08 lstm {'epoch': 1, 'train_mae': 19.52760865362711, 'validation_mae': 17.88504981994629, 'seconds': 7.329133033752441}
+PEMS08 lstm {'epoch': 2, 'train_mae': 18.192497437002103, 'validation_mae': 17.849437713623047, 'seconds': 18.360651969909668}
+PEMS08 lstm {'epoch': 3, 'train_mae': 18.119995607799506, 'validation_mae': 17.795230865478516, 'seconds': 31.886361598968506}
+PEMS08 lstm {'epoch': 4, 'train_mae': 17.934487715263888, 'validation_mae': 17.471765518188477, 'seconds': 44.5344762802124}
+PEMS08 lstm {'epoch': 5, 'train_mae': 17.478718127929337, 'validation_mae': 17.017742156982422, 'seconds': 52.42946529388428}
+PEMS08 lstm {'epoch': 6, 'train_mae': 17.078354008807217, 'validation_mae': 16.799373626708984, 'seconds': 60.95682168006897}
+RESULT {"dataset": "PEMS08", "model": "lstm", "seed": 42, "epochs_requested": 6, "train_stride": 3, "train_samples": 3567, "validation_stride": 3, "test_samples": 3570, "nodes": 170, "train_end": 10713, "validation_end": 14284, "time_points": 17856, "training_seconds": 62.09330654144287, "mae": 16.503822326660156, "rmse": 25.348798751831055, "mape_nonzero_percent": 10.395273208618164, "mape_coverage": 0.9966194320865601, "horizon_mae": [14.658100128173828, 16.573881149291992, 18.27948570251465]}
+PEMS08 mlp {'epoch': 1, 'train_mae': 19.221670080563563, 'validation_mae': 17.621482849121094, 'seconds': 0.45148754119873047}
+PEMS08 mlp {'epoch': 2, 'train_mae': 17.64084926092714, 'validation_mae': 16.945476531982422, 'seconds': 0.8827393054962158}
+PEMS08 mlp {'epoch': 3, 'train_mae': 16.988226401551, 'validation_mae': 16.511310577392578, 'seconds': 1.2528116703033447}
+PEMS08 mlp {'epoch': 4, 'train_mae': 16.6686194054589, 'validation_mae': 16.32783317565918, 'seconds': 1.6822633743286133}
+PEMS08 mlp {'epoch': 5, 'train_mae': 16.533456519813193, 'validation_mae': 16.35186767578125, 'seconds': 2.0747313499450684}
+PEMS08 mlp {'epoch': 6, 'train_mae': 16.49650915570907, 'validation_mae': 16.314363479614258, 'seconds': 2.52058744430542}
+RESULT {"dataset": "PEMS08", "model": "mlp", "seed": 42, "epochs_requested": 6, "train_stride": 3, "train_samples": 3567, "validation_stride": 3, "test_samples": 3570, "nodes": 170, "train_end": 10713, "validation_end": 14284, "time_points": 17856, "training_seconds": 2.6804678440093994, "mae": 16.039836883544922, "rmse": 24.75264549255371, "mape_nonzero_percent": 10.526825904846191, "mape_coverage": 0.9966194320865601, "horizon_mae": [14.467358589172363, 16.104736328125, 17.547414779663086]}
+RESULT {"dataset": "PEMS08", "model": "ha", "seed": 42, "epochs_requested": 0, "train_stride": 3, "train_samples": 3567, "validation_stride": 3, "test_samples": 3570, "nodes": 170, "train_end": 10713, "validation_end": 14284, "time_points": 17856, "training_seconds": 0.04612421989440918, "mae": 36.36409378051758, "rmse": 54.1639518737793, "mape_nonzero_percent": 24.4539852142334, "mape_coverage": 0.9966194320865601, "horizon_mae": [36.3674201965332, 36.364173889160156, 36.360687255859375]}
+RESULT {"dataset": "PEMS08", "model": "persistence", "seed": 42, "epochs_requested": 0, "train_stride": 3, "train_samples": 3567, "validation_stride": 3, "test_samples": 3570, "nodes": 170, "train_end": 10713, "validation_end": 14284, "time_points": 17856, "training_seconds": 0.01992630958557129, "mae": 17.701679229736328, "rmse": 27.312631607055664, "mape_nonzero_percent": 10.967860221862793, "mape_coverage": 0.9966194320865601, "horizon_mae": [15.883545875549316, 17.710630416870117, 19.5108585357666]}

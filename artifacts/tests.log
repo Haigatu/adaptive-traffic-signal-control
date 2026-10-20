@@ -1,0 +1,10 @@
+test_forecaster_all_horizons_and_nodes (test_core.CoreTests.test_forecaster_all_horizons_and_nodes) ... ok
+test_prioritized_replay_weights (test_core.CoreTests.test_prioritized_replay_weights) ... ok
+test_split_targets_never_cross_end (test_core.CoreTests.test_split_targets_never_cross_end) ... ok
+test_sumo_horizon_yellow_and_shape (test_core.CoreTests.test_sumo_horizon_yellow_and_shape) ... ok
+test_tgcn_node_permutation_equivariance (test_core.CoreTests.test_tgcn_node_permutation_equivariance) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.176s
+
+OK

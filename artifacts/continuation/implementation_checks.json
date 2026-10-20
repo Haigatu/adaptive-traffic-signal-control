@@ -1,0 +1,9 @@
+{
+  "unit_and_sumo_tests_passed": 8,
+  "guard_random_valid_action_steps_tested": 20000,
+  "all_inference_weights_finite": true,
+  "resume_replay_transitions": 9227,
+  "replay_frames": 311,
+  "replay_matches_evaluation": true,
+  "recorded_red_clocks_within_bound": true
+}

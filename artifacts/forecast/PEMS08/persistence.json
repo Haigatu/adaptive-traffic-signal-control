@@ -1,0 +1,25 @@
+{
+  "dataset": "PEMS08",
+  "model": "persistence",
+  "seed": 42,
+  "epochs_requested": 0,
+  "train_stride": 3,
+  "train_samples": 3567,
+  "validation_stride": 3,
+  "test_samples": 3570,
+  "nodes": 170,
+  "train_end": 10713,
+  "validation_end": 14284,
+  "time_points": 17856,
+  "training_seconds": 0.01992630958557129,
+  "mae": 17.701679229736328,
+  "rmse": 27.312631607055664,
+  "mape_nonzero_percent": 10.967860221862793,
+  "mape_coverage": 0.9966194320865601,
+  "horizon_mae": [
+    15.883545875549316,
+    17.710630416870117,
+    19.5108585357666
+  ],
+  "history": []
+}
