@@ -1,0 +1,77 @@
+[
+  {
+    "saturation": 0.4,
+    "controllers": {
+      "d3qn_no_forecast": {
+        "delay_per_requested_vehicle_s": 62.74296264990551,
+        "mean_queue_vehicles": 28.256458333333335,
+        "throughput": 2034.5
+      },
+      "d3qn_forecast": {
+        "delay_per_requested_vehicle_s": 160.16209718069211,
+        "mean_queue_vehicles": 79.970625,
+        "throughput": 1997.0
+      },
+      "guarded": {
+        "delay_per_requested_vehicle_s": 128.46066687512916,
+        "mean_queue_vehicles": 60.560763888888886,
+        "throughput": 2000.0
+      },
+      "improved": {
+        "delay_per_requested_vehicle_s": 26.003283673063137,
+        "mean_queue_vehicles": 9.465069444444445,
+        "throughput": 2059.5
+      }
+    }
+  },
+  {
+    "saturation": 0.7,
+    "controllers": {
+      "d3qn_no_forecast": {
+        "delay_per_requested_vehicle_s": 169.8884746412306,
+        "mean_queue_vehicles": 132.91333333333336,
+        "throughput": 3567.5
+      },
+      "d3qn_forecast": {
+        "delay_per_requested_vehicle_s": 196.8773332908825,
+        "mean_queue_vehicles": 151.31298611111112,
+        "throughput": 3555.5
+      },
+      "guarded": {
+        "delay_per_requested_vehicle_s": 126.34176172406825,
+        "mean_queue_vehicles": 94.10993055555556,
+        "throughput": 3592.5
+      },
+      "improved": {
+        "delay_per_requested_vehicle_s": 179.93910303855847,
+        "mean_queue_vehicles": 110.19520833333334,
+        "throughput": 3534.0
+      }
+    }
+  },
+  {
+    "saturation": 0.95,
+    "controllers": {
+      "d3qn_no_forecast": {
+        "delay_per_requested_vehicle_s": 776.8299441302947,
+        "mean_queue_vehicles": 446.8980555555556,
+        "throughput": 4655.0
+      },
+      "d3qn_forecast": {
+        "delay_per_requested_vehicle_s": 894.8184798358166,
+        "mean_queue_vehicles": 460.7789583333333,
+        "throughput": 4301.5
+      },
+      "guarded": {
+        "delay_per_requested_vehicle_s": 828.2716686699024,
+        "mean_queue_vehicles": 427.5333333333333,
+        "throughput": 4562.0
+      },
+      "improved": {
+        "delay_per_requested_vehicle_s": 1091.8387074115442,
+        "mean_queue_vehicles": 364.7579861111111,
+        "throughput": 3821.0
+      }
+    }
+  }
+]

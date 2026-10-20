@@ -2,8 +2,8 @@
 
 **Two live intersections on one website. Two trained agents. Identical traffic.**
 
-Compare traffic signal control **without forecasting** against control **with a
-TGCN forecast**, then view a compact results page with measured differences.
+Compare the original controller **without forecasting** against an **improved
+trained policy with a TGCN forecast**, then view measured differences.
 Runs natively on Windows; no WSL, training, or web service required.
 
 ![Live forecast versus no-forecast comparison](docs/assets/dashboard.png)
@@ -31,9 +31,9 @@ Use `--sumo-gui` to additionally open the native SUMO windows.
 
 | Left website panel | Right website panel |
 | --- | --- |
-| No forecast | With forecast |
-| D3QN, 40 inputs | D3QN + TGCN, 52 inputs |
-| `d3qn_no_forecast_seed0.pt` | `d3qn_forecast_seed0.pt` |
+| No forecast | Improved + forecast |
+| Original D3QN, 40 inputs | Distilled DuelingQ + TGCN + guard, 56 inputs |
+| `d3qn_no_forecast_seed0.pt` | Validation-selected `candidate_5.pt` or `candidate_30.pt` |
 
 Both simulations use the same demand seed, route file contents, warm-up, and
 measurement horizon. Separate Python processes synchronize every **0.5 seconds
@@ -42,7 +42,7 @@ seconds; switching adds 3 yellow seconds.
 
 The initial 3,600 simulated seconds collect forecast history using the original
 cyclic warm-up controller. Wait for **AI ACTIVE**. The default demonstration
-then measures 300 simulated seconds. The browser opens immediately with two
+then measures 1,800 simulated seconds without added playback delay. The browser opens immediately with two
 live canvas views driven by real SUMO vehicle positions and traffic lights.
 SUMO runs in the background. When the run finishes, the same page switches to
 a portable replay and results:
@@ -58,6 +58,13 @@ Results are calculated from the two runs that just finished. Saved historical
 benchmarks are available in a collapsed section and are never mixed into the
 live comparison.
 
+On six fresh hour-long traffic scenarios (two seeds per load), the improved
+configuration reduced mean delay versus the original no-forecast policy by
+**52% / 39% / 11%** at loads **0.40 / 0.70 / 0.95**. One congested case
+regressed by 1.6%. These are separate benchmark results, not numbers injected
+into the live demo. The previous guarded policy remains stronger at medium
+and high load; use `--policy guarded` to compare it.
+
 ## Commands
 
 ```powershell
@@ -70,6 +77,12 @@ live comparison.
 # Lower traffic demand, slower playback
 .\demo.cmd --saturation 0.4 --delay 100
 
+# Queue-aware distilled policy with forecasting and the no-green bound
+.\demo.cmd --policy improved
+
+# Previously trained guarded continuation
+.\demo.cmd --policy guarded
+
 # Automated smoke check; incomplete forecast history
 .\demo.cmd --headless --warmup 0 --duration 30 --no-browser
 
@@ -80,9 +93,12 @@ live comparison.
 .\.venv\Scripts\python.exe -m atsc.demo --agent guarded
 ```
 
-The default comparison intentionally uses the two original trained policies.
-The guarded continuation is separate: its extra timers, action mask and
-additional training would confound a forecast/no-forecast comparison.
+Use `--policy original` for the two original trained policies.
+The improved controller adds queue-aware policy distillation, red-time clocks
+and an action mask. Its gains cannot be attributed to forecasting alone.
+It chooses a checkpoint by the requested load using validation results.
+See [training protocol and results](docs/improvement.md). A five-minute run
+can still regress while queues adjust; the default observes 30 simulated minutes.
 
 ## Project layout
 
@@ -99,6 +115,8 @@ atsc/
   guarded.py          Feasible-action mask and red-time clocks
   control.py          Original training and evaluation
   continuation.py     Guarded continuation experiment
+  improve.py          Separate policy-distillation experiment and benchmark
+  traci_cache.py      Batched vehicle observations for faster native demos
 artifacts/            Trained weights and original experiment results
 data/network/         Original intersection and detectors
 tests/                Simulation, guard, pairing and report checks

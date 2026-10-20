@@ -1,0 +1,25 @@
+{
+  "split": "test",
+  "seeds": [
+    1110,
+    1111
+  ],
+  "loads": [
+    0.4,
+    0.7,
+    0.95
+  ],
+  "duration": 3600,
+  "warmup": 3600,
+  "controllers": [
+    "d3qn_no_forecast",
+    "d3qn_forecast",
+    "guarded",
+    "improved"
+  ],
+  "checkpoint_sha256": {
+    "0.4": "f32182069d979053aa9e0854f23d992eb7489176eff30a29962ee7d715ff6676",
+    "0.7": "f32182069d979053aa9e0854f23d992eb7489176eff30a29962ee7d715ff6676",
+    "0.95": "f32182069d979053aa9e0854f23d992eb7489176eff30a29962ee7d715ff6676"
+  }
+}

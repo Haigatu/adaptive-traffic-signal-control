@@ -46,11 +46,13 @@ def collect_pair(folder):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--duration", type=int, default=300)
+    parser.add_argument("--duration", type=int, default=1800)
     parser.add_argument("--warmup", type=int, default=3600)
-    parser.add_argument("--delay", type=float, default=50)
+    parser.add_argument("--delay", type=float, default=0)
     parser.add_argument("--seed", type=int, default=1000)
     parser.add_argument("--saturation", type=float, default=0.7)
+    parser.add_argument("--policy", choices=["original", "guarded", "improved"],
+                        default="improved", help="Right-hand forecasting controller")
     parser.add_argument("--headless", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--sumo-gui", action="store_true",
                         help="Also open the two native SUMO-GUI windows")
@@ -65,7 +67,8 @@ def main(argv=None):
     initial = {"mode": "paired", "status": "running",
                "seed": args.seed, "saturation": args.saturation,
                "duration": args.duration, "warmup": args.warmup,
-               "runs": {"no_forecast": {}, "forecast": {}}}
+               "runs": {"no_forecast": {"agent": "no_forecast"},
+                        "forecast": {"agent": args.policy}}}
     server, url = start_server(folder, initial)
     print(f"Live dashboard: {url}", flush=True)
     if not args.no_browser:
@@ -83,7 +86,7 @@ def main(argv=None):
     try:
         for name, agent, position in [
             ("no_forecast", "no_forecast", "0,0"),
-            ("forecast", "original", "770,0"),
+            ("forecast", args.policy, "770,0"),
         ]:
             child_args = common + ["--agent", agent, "--output", str(folder / name),
                                    "--window-pos", position]

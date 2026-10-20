@@ -76,7 +76,8 @@ def checkpoint_path(name, seed):
 
 
 def evaluate(
-    name, seed, saturation, split="test", duration=3600, record=False, training_seed=0
+    name, seed, saturation, split="test", duration=3600, record=False, training_seed=0,
+    run_dir=None,
 ):
     torch.set_num_threads(1)
     predictor = ROOT / "artifacts" / "forecast" / "simulation_tgcn.pt"
@@ -94,6 +95,7 @@ def evaluate(
         with_forecast=(ck["with_forecast"] if ck else True),
         duration=duration,
         record=record,
+        run_dir=run_dir,
     )
     s = env.reset(seed, saturation, split)
     baseline = Baseline(name, saturation) if ck is None else None

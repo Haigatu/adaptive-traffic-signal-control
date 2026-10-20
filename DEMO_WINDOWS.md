@@ -9,7 +9,8 @@ After running `setup.cmd` and setting `SUMO_HOME`, run:
 ```
 
 A local website opens with two side-by-side live intersections. The left panel
-uses D3QN without forecasting; the right uses D3QN with TGCN. Both use identical
+uses original D3QN without forecasting; the right uses the improved distilled
+policy with TGCN and a red-time guard. Both use identical
 demand and synchronized 0.5-second simulation steps. Vehicles and signals come
 from actual SUMO via TraCI, rendered on canvas. After completion the same page
 shows a replay, numeric results and percentage differences.
@@ -24,13 +25,14 @@ To additionally show the native SUMO windows:
 
 | Option | Default | Meaning |
 | --- | --- | --- |
-| `--duration` | 300 | Measured simulation seconds |
+| `--duration` | 1800 | Measured simulation seconds |
 | `--warmup` | 3600 | Simulated seconds of forecast-history collection |
-| `--delay` | 50 | Additional milliseconds per simulation step |
+| `--delay` | 0 | Additional milliseconds per simulation step |
 | `--seed` | 1000 | Shared demand and SUMO seed |
 | `--saturation` | 0.7 | Shared nominal traffic load, greater than 0 and at most 1 |
 | `--sumo-gui` | off | Also open the two native SUMO-GUI windows |
 | `--no-browser` | off | Generate results without opening the browser |
+| `--policy` | improved | Right-hand policy: improved, original, or guarded |
 
 Warm-up uses the original cyclic controller and no presentation delay.
 Wait for **AI ACTIVE** before presenting the learned policy. A shortened
@@ -63,10 +65,16 @@ from the current live comparison.
 .\.venv\Scripts\python.exe -m atsc.demo --agent guarded
 ```
 
-The paired comparison uses original, separately trained 40-input and 52-input
-policies. It does not claim a causal improvement from forecasting alone.
-The guarded continuation adds clocks and a 120-second no-green constraint;
-that is an independent experiment, not the right-hand policy in the default demo.
+Use `--policy original` for the original 40-input and 52-input policies.
+The improved version adds policy distillation, clocks and a 120-second
+no-green constraint. It does not claim a causal improvement from forecasting
+alone. The checkpoint is selected by requested load using validation results.
+The default observes 30 simulated minutes because a five-minute sample can
+miss later queue growth. Use `--duration 300` for a short run.
+
+Vehicle observations are batched using TraCI subscriptions. A parity test
+compares states and all metrics with ordinary TraCI on identical traffic.
+This changes communication overhead, not signal timing or simulation logic.
 
 ## Troubleshooting
 

@@ -58,6 +58,9 @@ def build_report(run_dir):
             for r in rows if r["controller"].startswith("d3qn")
         ) if summary.get("checkpoint_sha256") else False,
     }
+    improvement = ROOT / "artifacts/improvement/summary_by_load.json"
+    if improvement.exists():
+        data["improvement"] = json.loads(improvement.read_text(encoding="utf-8"))
     if summary.get("mode") == "paired":
         data["pair"] = {}
         data["replays"] = {}

@@ -1,0 +1,33 @@
+{
+  "checkpoint": "candidate_15.pt",
+  "checkpoint_sha256": "64b117410b1f441203e5fd35b34d52d5c51015b0143eff622425a6d0ac0800d1",
+  "seed": 610,
+  "saturation": 0.95,
+  "split": "tune",
+  "integrated_delay_vehicle_s": 1733015.3414039095,
+  "delay_per_requested_vehicle_s": 765.1281860502912,
+  "mean_queue_vehicles": 378.1825,
+  "throughput": 2083,
+  "conflicts": 720,
+  "conflicts_per_1000_arrivals": 345.6553048487758,
+  "tet_vehicle_s": 598.5,
+  "waiting_vehicle_s": 680728.5,
+  "co2_kg": 2086.6358211865704,
+  "switches": 100,
+  "teleports": 0,
+  "collision_vehicle_events": 0,
+  "requested_evaluation_vehicles": 2265,
+  "inserted_evaluation_vehicles": 2133,
+  "remaining_in_network": 755,
+  "pending_insertion": 398,
+  "elapsed_s": 1800.0,
+  "max_without_green_s": 82.0,
+  "max_without_green_by_approach_s": [
+    82.0,
+    76.0,
+    79.0,
+    82.0
+  ],
+  "constrained_decisions": 0,
+  "red_limit_s": 120.0
+}

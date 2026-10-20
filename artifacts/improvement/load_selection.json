@@ -1,0 +1,21 @@
+{
+  "checkpoints": {
+    "0.4": "candidate_5.pt",
+    "0.7": "candidate_30.pt",
+    "0.95": "candidate_30.pt"
+  },
+  "criterion": "minimum validation delay per load",
+  "interpolation": "nearest configured load",
+  "test_seeds": [
+    1120,
+    1121
+  ],
+  "test_loads": [
+    0.4,
+    0.7,
+    0.95
+  ],
+  "duration": 3600,
+  "warmup": 3600,
+  "reason": "Global selection regressed under congested test demand."
+}

@@ -9,6 +9,7 @@
 <div class="meta" id="meta"></div>
 <style>
 [hidden]{display:none!important}
+#newBenchmark td{font-size:16px;background:transparent}#newBenchmark td:first-child{font-size:13px}#newBenchmark th{color:#666}#newBenchmark tr:last-child td{background:#f1f8f5}
 .views{display:grid;grid-template-columns:1fr 1fr;gap:20px}.view{border:1px solid #ddd;border-radius:8px;overflow:hidden;background:white}.viewbar{display:flex;justify-content:space-between;padding:13px 16px;font-size:13px}.viewbar b{font-weight:500}.viewbar span{font:12px Consolas,monospace;color:#777}canvas{display:block;width:100%;aspect-ratio:1;background:#f6f7f6}.playback{display:flex;align-items:center;gap:14px;margin:18px 0}.playback input{flex:1;accent-color:#08775a}.livebadge{font-size:11px;color:#08775a}.viewfoot{display:flex;justify-content:space-between;padding:10px 16px;font:12px Consolas,monospace;color:#666}@media(max-width:650px){.views{gap:8px}.viewbar{padding:10px;font-size:11px}.viewfoot{padding:8px;font-size:10px}}@media print{.playback{display:none}}
 </style>
 <div class="views" id="views">
@@ -19,6 +20,7 @@
 <div class="tablewrap" id="metricsBlock"><table><thead id="head"></thead><tbody id="metrics"></tbody></table></div>
 <p id="note"></p>
 <section class="chart" id="queueHistory"><h2>Queue / vehicles</h2><div class="legend" id="legend"></div><div id="chart"></div></section>
+<details id="newBenchmark" hidden><summary>New benchmark / 24 runs</summary><div class="tablewrap"><table><thead><tr><th>Delay / vehicle, s</th><th>Load 0.40</th><th>Load 0.70</th><th>Load 0.95</th></tr></thead><tbody id="newSaved"></tbody></table></div><p>Seeds 1120, 1121 / 3,600 s measured / separate from this demo. Improved policy includes additional training and a red-time guard.</p></details>
 <details id="benchmark"><summary>Saved benchmark / 60 runs</summary><select id="load" aria-label="Load"><option value="0.4">Load 0.40</option><option value="0.7" selected>Load 0.70</option><option value="0.95">Load 0.95</option></select><div class="tablewrap"><table><thead><tr><th>Controller</th><th>Delay, s</th><th>Arrivals</th><th>Max red, s</th></tr></thead><tbody id="saved"></tbody></table></div><p>4 demand seeds per load / 3,600 s per run / separate from this demo.</p></details>
 <details><summary>Run details</summary><p id="details"></p></details>
 <footer><span id="status"></span><a href="summary.json">Run data</a><span>SUMO / TraCI / D3QN</span></footer></main>
@@ -28,7 +30,9 @@
 const D=JSON.parse(document.getElementById("report-data").textContent),R=D.run,$=id=>document.getElementById(id),pair=R.mode==="paired";
 const fmt=(n,d=1)=>Number.isFinite(n)?n.toLocaleString("en-US",{maximumFractionDigits:d}):"--";
 const runs=pair?[R.runs.no_forecast,R.runs.forecast]:[R];
-const names=pair?["No forecast","With forecast"]:[R.agent==="no_forecast"?"No forecast":R.agent==="guarded"?"Guarded D3QN":"With forecast"];
+const policyName=r=>r.agent==="no_forecast"?"No forecast":r.agent==="improved"?"Improved + forecast":r.agent==="guarded"?"Guarded + forecast":"With forecast";
+const names=runs.map(policyName);
+document.querySelectorAll(".viewbar b").forEach((el,i)=>{if(names[i])el.textContent=names[i]});
 const traces=pair?[D.pair.no_forecast||[],D.pair.forecast||[]]:[D.decisions||[]];
 const measures=[["Delay / requested vehicle","s","delay_per_requested_vehicle_s",-1],["Arrivals","vehicles","throughput",1],["Average queue","vehicles","mean_queue_vehicles",-1],["Total stopped time","vehicle-seconds","waiting_vehicle_s",-1],["CO2","kg","co2_kg",-1],["Phase switches","","switches",0]];
 $("meta").innerHTML=`<small>SEED <strong>${R.seed}</strong></small><small>LOAD <strong>${fmt(R.saturation,2)}</strong></small><small>DURATION <strong>${fmt(R.duration,0)} s</strong></small><small>WARM-UP <strong>${fmt(R.warmup,0)} s</strong></small>`;
@@ -47,7 +51,12 @@ const labels={webster:"Webster",max_pressure:"Max Pressure",d3qn_original:"D3QN"
 function saved(){const rows=D.groups.filter(r=>r.saturation===Number($("load").value));$("saved").innerHTML=rows.map(r=>`<tr><td>${labels[r.controller]}</td><td>${fmt(r.delay_per_requested_vehicle_s)}</td><td>${fmt(r.throughput,0)}</td><td>${fmt(r.max_without_green_s)}</td></tr>`).join("");}
 if([0.4,0.7,0.95].includes(R.saturation))$("load").value=String(R.saturation);
 $("load").addEventListener("change",saved);saved();
-$("details").textContent=runs.map((r,i)=>`${names[i]}: ${r.checkpoint_sha256||"no checkpoint hash"}`).join(" | ")+(pair?" | Same-route SHA-256: "+R.runs.forecast.route_sha256:"");
+if(D.improvement?.length===3){
+ $("newBenchmark").hidden=false;
+ const controllers=[["d3qn_no_forecast","No forecast"],["d3qn_forecast","Original + forecast"],["guarded","Guarded + forecast"],["improved","Improved + forecast"]];
+ $("newSaved").innerHTML=controllers.map(([key,label])=>`<tr><td>${label}</td>${D.improvement.map(g=>`<td>${fmt(g.controllers[key].delay_per_requested_vehicle_s)}</td>`).join("")}</tr>`).join("");
+}
+$("details").textContent=runs.map((r,i)=>`${names[i]}: ${r.training_method||"D3QN"} / ${r.checkpoint_sha256||"no checkpoint hash"}`).join(" | ")+(pair?" | Same-route SHA-256: "+R.runs.forecast.route_sha256:"");
 const latest=[null,null],prior=[null,null],updated=[0,0],keys=["no_forecast","forecast"];
 function frame(i,f){
  if(!f)return;

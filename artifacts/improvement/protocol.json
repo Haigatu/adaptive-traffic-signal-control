@@ -1,0 +1,39 @@
+{
+  "method": "queue-aware policy distillation into the DuelingQ architecture",
+  "source": "artifacts/continuation/resume.pt",
+  "source_sha256": "50f07eb0076bda616bf19daacee4338bc9fb6756d3c831d4b3634b47065432a5",
+  "training_states": 16608,
+  "heldout_training_states": 1846,
+  "bonuses": [
+    5,
+    15,
+    30
+  ],
+  "epochs": 40,
+  "seed": 42,
+  "validation": {
+    "split": "tune",
+    "seed": 610,
+    "loads": [
+      0.4,
+      0.7,
+      0.95
+    ],
+    "duration": 1800,
+    "warmup": 3600
+  },
+  "test": {
+    "split": "test",
+    "seeds": [
+      1110,
+      1111
+    ],
+    "loads": [
+      0.4,
+      0.7,
+      0.95
+    ],
+    "duration": 3600,
+    "warmup": 3600
+  }
+}

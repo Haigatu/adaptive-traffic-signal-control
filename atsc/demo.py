@@ -75,7 +75,7 @@ class GuiClockEnvironment(DemoPacing, ClockEnvironment):
 
 def main(argv=None, sync=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--agent", choices=["guarded", "original", "no_forecast"], default="guarded")
+    parser.add_argument("--agent", choices=["improved", "guarded", "original", "no_forecast"], default="guarded")
     parser.add_argument("--output", type=Path, help=argparse.SUPPRESS)
     parser.add_argument("--web-frames", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--window-pos", help="SUMO window position x,y")
@@ -96,13 +96,17 @@ def main(argv=None, sync=None):
     if args.duration <= 0 or args.warmup < 0 or args.delay < 0 or not 0 < args.saturation <= 1:
         parser.error("duration > 0, warmup/delay >= 0, 0 < saturation <= 1 required")
 
-    guarded = args.agent == "guarded"
+    guarded = args.agent in ("guarded", "improved")
     forecast = args.agent != "no_forecast"
     checkpoint = ROOT / "artifacts" / {
+        "improved": "improvement/selected.pt",
         "guarded": "continuation/selected.pt",
         "original": "control/d3qn_forecast_seed0.pt",
         "no_forecast": "control/d3qn_no_forecast_seed0.pt",
     }[args.agent]
+    if args.agent == "improved":
+        from .improve import improved_checkpoint
+        checkpoint = improved_checkpoint(args.saturation)
     predictor = ROOT / "artifacts/forecast/simulation_tgcn.pt" if forecast else None
     for path in (checkpoint, ROOT / "data/PEMS08.npz", *([predictor] if predictor else [])):
         if not path.is_file():
@@ -123,6 +127,7 @@ def main(argv=None, sync=None):
     metadata = {
         **{k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()},
         "checkpoint": str(checkpoint),
+        "training_method": ck.get("method", "D3QN"),
         "checkpoint_sha256": hashlib.sha256(checkpoint.read_bytes()).hexdigest(),
         "predictor_sha256": hashlib.sha256(predictor.read_bytes()).hexdigest() if predictor else None,
         "sumo": executable, "backend": "traci", "status": "starting",
@@ -137,6 +142,8 @@ def main(argv=None, sync=None):
         **({"enforce": True} if guarded else {}),
     )
     env.step_delay = args.delay / 1000 if args.web_frames or not args.headless else 0
+    from .traci_cache import CachedTraCI
+    env.sim = CachedTraCI(env.sim)
     env.sync = sync
     env.web_frames = args.web_frames
     summary = run_dir / "summary.json"
@@ -152,7 +159,7 @@ def main(argv=None, sync=None):
         if not args.headless:
             x, y = env.sim.junction.getPosition("J")
             env.sim.gui.setBoundary("View #0", x - 160, y - 160, x + 160, y + 160)
-        print("AI ACTIVE: trained D3QN inference; signals controlled via TraCI.", flush=True)
+        print(f"AI ACTIVE: {metadata['training_method']}; signals controlled via TraCI.", flush=True)
         with (run_dir / "decisions.jsonl").open("w", encoding="utf-8", buffering=1) as log:
             done = False
             while not done:
