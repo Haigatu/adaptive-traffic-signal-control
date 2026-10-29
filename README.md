@@ -151,10 +151,14 @@ guarded continuation selected on validation scenarios. Numerical results and
 weights are retained unchanged. `MANIFEST_SHA256.json` records the **original
 research snapshot**, not the updated demo source tree.
 
-Original research reports (`RESULTS.html`, `CONTINUATION.html`, and replay HTML
-files) remain as archived outputs in their original language to preserve that
-snapshot. The current demo, results page, setup instructions and repository
-documentation are in English.
+The English [results notebook](notebook/Results_Evidence.ipynb) consolidates
+the original experiments, guarded continuation and final distillation results.
+Its [HTML export](notebook/Results_Evidence.html) can be downloaded and opened
+locally. Earlier standalone HTML reports and replay exports have been removed;
+their raw experiment data and trained weights remain in `artifacts/`.
+The snapshot manifest may therefore reference historical exports that are no
+longer included in the current checkout. Legacy report-generation scripts remain
+available for reproducing those exports explicitly.
 
 Delay is an integrated speed-loss proxy plus pending-insertion time, divided by
 requested demand; it is not mean completed-trip travel time. TTC is a rear-end
