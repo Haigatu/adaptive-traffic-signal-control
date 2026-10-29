@@ -1,0 +1,5 @@
+﻿stage,controllers,seeds,runs,collisions,teleports
+1,5,"[np.int64(200), np.int64(201), np.int64(202), np.int64(203), np.int64(204), np.int64(205), np.int64(206), np.int64(207), np.int64(208), np.int64(209)]",150,0,0
+2,5,"[np.int64(1000), np.int64(1001), np.int64(1002), np.int64(1003)]",60,0,0
+3a,4,"[np.int64(1110), np.int64(1111)]",24,0,0
+3b,4,"[np.int64(1120), np.int64(1121)]",24,0,0

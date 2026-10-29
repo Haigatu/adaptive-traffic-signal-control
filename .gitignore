@@ -4,3 +4,10 @@ data/runs/
 *.part
 .venv/
 demo_runs/
+
+.ipynb_checkpoints/
+.pytest_cache/
+.ruff_cache/
+.env
+.env.*
+!.env.example

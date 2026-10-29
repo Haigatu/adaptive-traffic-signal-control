@@ -1,0 +1,22 @@
+{
+  "PEMS04.npz": {
+    "url": "https://raw.githubusercontent.com/guoshnBJTU/ASTGNN/main/data/PEMS04/PEMS04.npz",
+    "sha256": "95a3c9b720fffdb85f0330d09bfab41b0b3cad0ca86c0d7d5f3accacb4ac999a",
+    "bytes": 32956284
+  },
+  "PEMS04.csv": {
+    "url": "https://raw.githubusercontent.com/guoshnBJTU/ASTGNN/main/data/PEMS04/PEMS04.csv",
+    "sha256": "68ffaa80447eb34428a9999dc28363c61406ec0fd714686d0582d2386ac6f5f7",
+    "bytes": 4852
+  },
+  "PEMS08.npz": {
+    "url": "https://raw.githubusercontent.com/guoshnBJTU/ASTGNN/main/data/PEMS08/PEMS08.npz",
+    "sha256": "e1d03ce74e9fb79149e6e7c37c680214822c4a285baa2f42278cacabcd25c075",
+    "bytes": 18525419
+  },
+  "PEMS08.csv": {
+    "url": "https://raw.githubusercontent.com/guoshnBJTU/ASTGNN/main/data/PEMS08/PEMS08.csv",
+    "sha256": "859d68e7583ed4e6016588eaaca494d3ece286dae361614c5c1833017f87eaa7",
+    "bytes": 4032
+  }
+}

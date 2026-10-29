@@ -1,0 +1,25 @@
+{
+  "dataset": "PEMS08",
+  "model": "ha",
+  "seed": 42,
+  "epochs_requested": 0,
+  "train_stride": 3,
+  "train_samples": 3567,
+  "validation_stride": 3,
+  "test_samples": 3570,
+  "nodes": 170,
+  "train_end": 10713,
+  "validation_end": 14284,
+  "time_points": 17856,
+  "training_seconds": 0.04612421989440918,
+  "mae": 36.36409378051758,
+  "rmse": 54.1639518737793,
+  "mape_nonzero_percent": 24.4539852142334,
+  "mape_coverage": 0.9966194320865601,
+  "horizon_mae": [
+    36.3674201965332,
+    36.364173889160156,
+    36.360687255859375
+  ],
+  "history": []
+}

@@ -8,6 +8,19 @@ Runs natively on Windows; no WSL, training, or web service required.
 
 ![Live forecast versus no-forecast comparison](docs/assets/dashboard.png)
 
+## Results notebook
+
+Open [the executed notebook](notebook/Results_Evidence.ipynb) to follow the
+analysis from individual experiment records to the reported results. It includes
+258 test runs, paired controller comparisons, forecasting baselines, and eight
+figures. All outputs are saved for viewing on GitHub.
+
+For a presentation without Jupyter, download the repository and open
+`notebook/Results_Evidence.html` in a browser. To rerun the analysis, follow the
+[notebook instructions](notebook/README.md). Its inputs are included, including
+the PeMS08 data needed to recompute two forecasting baselines. This notebook
+analyses saved experiments; it does not rerun model training or SUMO.
+
 ## Quick start
 
 Install [Python 3.12](https://www.python.org/downloads/) and

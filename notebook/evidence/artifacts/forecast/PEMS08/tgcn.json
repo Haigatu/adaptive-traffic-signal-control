@@ -1,0 +1,62 @@
+{
+  "dataset": "PEMS08",
+  "model": "tgcn",
+  "seed": 42,
+  "epochs_requested": 6,
+  "train_stride": 3,
+  "train_samples": 3567,
+  "validation_stride": 3,
+  "test_samples": 3570,
+  "nodes": 170,
+  "train_end": 10713,
+  "validation_end": 14284,
+  "time_points": 17856,
+  "training_seconds": 51.89074730873108,
+  "mae": 17.198389053344727,
+  "rmse": 26.3723201751709,
+  "mape_nonzero_percent": 11.236019134521484,
+  "mape_coverage": 0.9966194320865601,
+  "horizon_mae": [
+    15.474961280822754,
+    17.154016494750977,
+    18.9661922454834
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "train_mae": 19.408285484649802,
+      "validation_mae": 17.891849517822266,
+      "seconds": 9.74140453338623
+    },
+    {
+      "epoch": 2,
+      "train_mae": 18.18511493178837,
+      "validation_mae": 17.839813232421875,
+      "seconds": 17.19181251525879
+    },
+    {
+      "epoch": 3,
+      "train_mae": 18.112970311394825,
+      "validation_mae": 17.771787643432617,
+      "seconds": 24.55409526824951
+    },
+    {
+      "epoch": 4,
+      "train_mae": 18.010863300983278,
+      "validation_mae": 17.65471649169922,
+      "seconds": 32.22701978683472
+    },
+    {
+      "epoch": 5,
+      "train_mae": 17.872650426254367,
+      "validation_mae": 17.552759170532227,
+      "seconds": 40.50540852546692
+    },
+    {
+      "epoch": 6,
+      "train_mae": 17.73990949835495,
+      "validation_mae": 17.425996780395508,
+      "seconds": 49.27746081352234
+    }
+  ]
+}

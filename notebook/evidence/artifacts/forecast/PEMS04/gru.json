@@ -1,0 +1,62 @@
+{
+  "dataset": "PEMS04",
+  "model": "gru",
+  "seed": 42,
+  "epochs_requested": 6,
+  "train_stride": 3,
+  "train_samples": 3394,
+  "validation_stride": 3,
+  "test_samples": 3397,
+  "nodes": 307,
+  "train_end": 10195,
+  "validation_end": 13593,
+  "time_points": 16992,
+  "training_seconds": 148.71730494499207,
+  "mae": 20.94725799560547,
+  "rmse": 33.140174865722656,
+  "mape_nonzero_percent": 14.08798885345459,
+  "mape_coverage": 0.9870036057235148,
+  "horizon_mae": [
+    18.89763069152832,
+    20.90058708190918,
+    23.04355812072754
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "train_mae": 23.88336811890231,
+      "validation_mae": 23.4879093170166,
+      "seconds": 25.172729015350342
+    },
+    {
+      "epoch": 2,
+      "train_mae": 22.399996802828497,
+      "validation_mae": 23.303081512451172,
+      "seconds": 48.699132442474365
+    },
+    {
+      "epoch": 3,
+      "train_mae": 22.185653504856965,
+      "validation_mae": 23.010271072387695,
+      "seconds": 67.99389052391052
+    },
+    {
+      "epoch": 4,
+      "train_mae": 21.82950722715364,
+      "validation_mae": 22.541118621826172,
+      "seconds": 94.16564273834229
+    },
+    {
+      "epoch": 5,
+      "train_mae": 21.33601871541472,
+      "validation_mae": 22.015493392944336,
+      "seconds": 116.87385392189026
+    },
+    {
+      "epoch": 6,
+      "train_mae": 20.888051250057938,
+      "validation_mae": 21.62652015686035,
+      "seconds": 138.88485264778137
+    }
+  ]
+}

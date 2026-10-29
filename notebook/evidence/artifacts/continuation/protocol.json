@@ -1,0 +1,71 @@
+{
+  "version": "guarded-v1",
+  "source_episodes": 30,
+  "additional_episodes": 30,
+  "training_seed": 0,
+  "training_scenario_seeds": [
+    10000,
+    10001,
+    10002,
+    10003,
+    10004,
+    10005,
+    10006,
+    10007,
+    10008,
+    10009,
+    10010,
+    10011,
+    10012,
+    10013,
+    10014,
+    10015,
+    10016,
+    10017,
+    10018,
+    10019,
+    10020,
+    10021,
+    10022,
+    10023,
+    10024,
+    10025,
+    10026,
+    10027,
+    10028,
+    10029
+  ],
+  "training_saturation": 0.7,
+  "validation_seeds": [
+    500,
+    501,
+    502
+  ],
+  "validation_saturation": 0.7,
+  "selection": "minimum mean validation delay among episodes 0, 10, 20, 30",
+  "test_seeds": [
+    1000,
+    1001,
+    1002,
+    1003
+  ],
+  "test_saturations": [
+    0.4,
+    0.7,
+    0.95
+  ],
+  "controllers": [
+    "webster",
+    "max_pressure",
+    "d3qn_original",
+    "d3qn_guard_only",
+    "d3qn_guard_trained"
+  ],
+  "red_limit_s": 120.0,
+  "duration_s": 3600,
+  "warmup_s": 3600,
+  "weight": 1.0,
+  "scope": "one synthetic intersection, one training seed; exploratory paired comparison",
+  "source_sha256": "5ac4f2b225be9f5fc851495d2f0367c9ad5808747aa9996d33b717152af90da0",
+  "predictor_sha256": "0bd4f5e4225c041bcaabe0dcee62b2093e865f1e4e766140674eb49e84f0a83b"
+}

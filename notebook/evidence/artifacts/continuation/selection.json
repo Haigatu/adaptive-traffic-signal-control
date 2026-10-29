@@ -1,0 +1,6 @@
+{
+  "episode": 30,
+  "validation_mean_delay": 114.29589995642277,
+  "criterion": "minimum mean validation delay among episodes 0, 10, 20, 30",
+  "checkpoint_sha256": "3a206a01ddb533e3b71e355572eccceb7e30fe45002c4247a4e90e780515fc8c"
+}

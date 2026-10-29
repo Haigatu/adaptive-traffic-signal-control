@@ -1,0 +1,8 @@
+﻿claim,computed,paper,matches_rounding
+"Stage 3b reduction vs D3QN, load=0.4",51.98645614486922,52.0,True
+"Stage 3b reduction vs D3QN, load=0.7",38.68600504890083,38.7,True
+"Stage 3b reduction vs D3QN, load=0.95",11.048377519262376,11.0,True
+Safety TTC reduction %,18.388252978926147,18.4,True
+Safety delay growth %,280.02275810384424,280.0,True
+SUMO MAE reduction %,23.38802449758679,23.4,True
+Stage 2 medium-load reduction %,44.80360606788886,44.8,True

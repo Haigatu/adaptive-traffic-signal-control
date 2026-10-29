@@ -1,0 +1,10 @@
+torch==2.14.1+cpu
+numpy==2.3.5
+pandas==2.2.3
+scipy==1.17.0
+matplotlib==3.10.8
+eclipse-sumo==1.27.1
+libsumo==1.27.1
+traci==1.27.1
+sumo-data==1.27.1
+sumolib==1.27.1
